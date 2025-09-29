@@ -1,6 +1,4 @@
-# NOTE: The data.csv was NOT done by me, my try at extracting the data can be found at ../engineering
-# This csv was done by executing code written by Antonello Buccoliero
-# Link to his submission: https://www.kaggle.com/code/antonellobuccoliero/structured-csv-for-jobbullettin-lacity-with-tool
+# NOTE: The data.csv was done by me, process of extracting the data can be found at ../engineering
 
 import pandas as pd
 import numpy as np
