@@ -10,25 +10,23 @@ df = pd.read_csv("data.csv", index_col=0)
 cmap = plt.get_cmap("BrBG", 14)
 
 
-
 #####################################
 # Question 1:
 #   A non-experienced job seeker wants to know what is the best job for him?
 
 nonxpjobs = df[
-        (
-            (df["EXPERIENCE_LENGTH"] == 0) |
-            (df["EXPERIENCE_LENGTH"].isna())
-        ) &
-        (
-            (df["EDUCATION_YEARS"] == 0) |
-            (df["EDUCATION_YEARS"].isna())
-        )
-    ]["JOB_CLASS_TITLE"]
+    (
+        (df["EXPERIENCE_LENGTH"] == 0) |
+        (df["EXPERIENCE_LENGTH"].isna())
+    ) &
+    (
+        (df["EDUCATION_YEARS"] == 0) |
+        (df["EDUCATION_YEARS"].isna())
+    )
+]["JOB_CLASS_TITLE"]
 
 # # print the jobs those dont require any experience or education at all
 # for x in nonxpjobs: print(x)
-
 
 
 #####################################
@@ -39,7 +37,7 @@ schooltypes = []
 for x in df["SCHOOL_TYPE"].unique():
     if str(x) == "nan":
         continue
-    schooltypes.append([x,len(df[df["SCHOOL_TYPE"] == x])])
+    schooltypes.append([x, len(df[df["SCHOOL_TYPE"] == x])])
 schooltypes.sort(key=lambda s: -s[-1])
 
 # # display a pie chart that shows the percentages
@@ -51,13 +49,13 @@ schooltypes.sort(key=lambda s: -s[-1])
 # plt.show()
 
 
-
 #####################################
 # Question 3:
 #   What the best time in the year to be ready for a job applying in any experience level?
 
 jobsbymonth = [0]*12
-monthnames = "January,February,March,April,May,June,July,August,September,October,November,December".split(",")
+monthnames = "January,February,March,April,May,June,July,August,September,October,November,December".split(
+    ",")
 for x in df["OPEN_DATE"].str.split("-"):
     jobsbymonth[int(x[1])-1] += 1
 
@@ -66,30 +64,29 @@ for x in df["OPEN_DATE"].str.split("-"):
 # plt.show()
 
 
-
 #####################################
 # Question 4:
 #   Is experience more important than educational level?
 
-subdf = df[["EXPERIENCE_LENGTH", "EDUCATION_YEARS", "ENTRY_SALARY"]].astype(float)
+subdf = df[["EXPERIENCE_LENGTH", "EDUCATION_YEARS",
+            "ENTRY_SALARY"]].astype(float)
 
 # # display a correlation matrix that shows which variable has bigger effect on the salary
 # plt.figure(figsize=(10, 10))
 # sns.heatmap(pd.DataFrame(subdf.corr(method="spearman")["ENTRY_SALARY"]), annot=True, cmap="BrBG", vmin=-1, vmax=1)
 # plt.show()
-# 
+#
 # # As seen, experience has bigger effect on the salary than the education.
-
 
 
 #####################################
 # Question 5:
 #   Which fresh grade job that will guarantee many job offers in the future for him?
 
-freshgraduate = df[df["EXPERIENCE_LENGTH"].isna() & (df["EDUCATION_YEARS"] > 0)]["JOB_CLASS_TITLE"]
+freshgraduate = df[df["EXPERIENCE_LENGTH"].isna() & (
+    df["EDUCATION_YEARS"] > 0)]["JOB_CLASS_TITLE"]
 # # print the jobs those don't require any experience but need education
 # for title in freshgraduate: print(title)
-
 
 
 #####################################
@@ -100,15 +97,13 @@ freshgraduate = df[df["EXPERIENCE_LENGTH"].isna() & (df["EDUCATION_YEARS"] > 0)]
 # print(df[df["NON-RACIST"] == False])
 
 
-
 #####################################
 # Question 7:
 #   The city need an advice based on your analysis, build a new schools for more fresh non-experienced workers or encorge the work environment to help the workers to get promotions?
 
-## Based on Q4, the experience has bigger effect than education. so the latter option has theoretically better results
- 
- 
- 
+# Based on Q4, the experience has bigger effect than education. so the latter option has theoretically better results
+
+
 #####################################
 # Question 8:
 #   What is the average salary for worker with a driver licence?
@@ -123,12 +118,11 @@ fsalaries.replace(-1, pd.NA, inplace=True)
 fsalaries.dropna(inplace=True)
 # print(fsalaries["ENTRY_SALARY"].mean().round().astype(int))
 
-## RESULTS:
-## Jobs with a required license:    97,670$
-## Jobs without a required license: 95,926$
- 
- 
- 
+# RESULTS:
+# Jobs with a required license:    97,670$
+# Jobs without a required license: 95,926$
+
+
 #####################################
 # Question 9:
 #   list the most feature that effect the salary of the worker.
@@ -149,11 +143,11 @@ corr = corr.iloc[corr["ENTRY_SALARY"].argsort()[::-1]]
 # sns.heatmap(pd.DataFrame(corr["ENTRY_SALARY"]), annot=True, cmap="BrBG", vmin=-1, vmax=1)
 # plt.show()
 
-## RESULTS:
-## The 4 columns with the highest correlation with the salary are:
-## JOB_CLASS_NO = 0.39
-## EXPERIENCE_LENGTH = 0.16
-## FULL_TIME_PART_TIME = -0.12
-## EDUCATION_YEARS = 0.11
+# RESULTS:
+# The 4 columns with the highest correlation with the salary are:
+# JOB_CLASS_NO = 0.39
+# EXPERIENCE_LENGTH = 0.16
+# FULL_TIME_PART_TIME = -0.12
+# EDUCATION_YEARS = 0.11
 
-## Overall, the most important factor is the experience length
+# Overall, the most important factor is the experience length
