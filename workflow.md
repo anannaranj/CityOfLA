@@ -29,3 +29,9 @@ for file in filenames:
 Here to get the count of the part time jobs I just did: `python main.py | grep "part-time" | wc -l`, and to get the full
 time it was just replacing a word, no need to program a counter in python or a list with filenames being appended to. it
 felt like a superpower I had in my hands!
+
+Other commands I enjoyed using:
+`ls -1 ./data/ | grep -l`
+`python main.py | less`
+`cat file.txt | wl-copy` (as I use wayland)
+`python main.py | wc -l`
