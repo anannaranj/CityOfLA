@@ -32,6 +32,9 @@ felt like a superpower I had in my hands!
 
 Other commands I enjoyed using:
 `ls -1 ./data/ | grep -l`
+
 `python main.py | less`
+
 `cat file.txt | wl-copy` (as I use wayland)
+
 `python main.py | wc -l`
